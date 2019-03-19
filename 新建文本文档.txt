@@ -1,0 +1,44 @@
+#include <stdio.h>
+main()
+{
+int i;
+i = 0;
+sleep(10);
+while (i < 5) {
+system("date");
+sleep(5);
+i++;
+}
+while (1) {
+system("date");
+sleep(10);
+}
+}
+
+现在依次运行下列三个命令。第一个命令生成一个c语言的可执行文件，文件名为generate；第二个命令是每隔5 秒和10秒把date命令的输出追加到dataFile文件中，这个命令为后台执行，注意后台执行的命令尾部加上&字符；最后一个命令tail –f dataFile，显示dataFile文件的当前内容和新追加的数据：
+gcc ch7.c –o generate
+./generate >> dataFile &
+tail –f dataFile
+在输入tail -f 命令1分钟左右后，按<Ctrl-C>终止tail程序。用kill -9 pid命令终止generate后台进程的执行。
+注：pid是执行generate程序的进程号；使用generate >> dataFile&命令后，屏幕打印后台进程作业号和进程号，其中第一个字段方括号内的数字为作业号，第二个数字为进程号；也可以用kill -9 %job终止generate 后台进程，job为作业号。
+最后用tail dataFile命令显示文件追加的内容。给出这些过程的你的会话。
+
+再把文件名dataFile 改成（移动）newDataFile，文件newDataFile 的inode多少？与dataFile 文件的inode号是否相同，若相同，为什么？
+然后再把文件newDataFile移动到/tmp目录下，文件/tmp/newDataFile的inode号是多少？比较结果如何，为什么？
+
+
+
+John	Doe	ECE	3.54	doe@jd.home.org		111.222.3333
+James	Davis	ECE	3.71	davis@jd.work.org	111.222.1111
+Al	Davis	CS	2.63	davis@a.lakers.org	111.222.2222
+Ahmad	Rashid	MBA	3.04	ahmad@mba.org		111.222.4444
+San	Chu	ECE	3.68	chu@sam.ab.com		111.222.5555
+Arum	Roy	SS	3.86	roy@ss.arts.edu		111.222.8888
+Rick	Marsh	CS	2.34	marsh@a.b.org		111.222.6666	
+James	Adam	CS	2.77	jadam@a.b.org		111.222.7777
+Art	Pohm	ECE	4.00	pohm@ap.a.org		111.222.9999
+John	Clark	ECE	2.68	clark@xyz.ab.com	111.222.5555
+Nabeel	Ali	EE	3.56	ali@ee.eng.edu		111.222.8888
+Tom	Nelson	EECK	3.81	nelson@tn.abc.org	111.222.6666
+
+
